@@ -12,9 +12,9 @@ import { Bug } from './models/Bug';
         </section>
         <section class="sort">
             <label for="">Order By :</label>
-            <input type="text" name="" id="">
+            <input type="text" [(ngModel)]="bugSort">
             <label for="">Descending :</label>
-            <input type="checkbox" name="" id="">
+            <input type="checkbox" [(ngModel)]="bugSortDescending">
         </section>
         <section class="edit">
             <label for="">Bug :</label>
@@ -23,12 +23,12 @@ import { Bug } from './models/Bug';
         </section>
         <section class="list">
             <ol>
-                <li *ngFor="let bug of bugs">
+                <li *ngFor="let bug of bugs | sort:bugSort:bugSortDescending">
                     <span class="bugname" (click)="onBugClick(bug)" [ngClass]="{closed : bug.isClosed, className : expr}">
-                        {{bug.name | trimText | uppercase}}
+                        {{bug.name | trimText:40}}
                     </span>
                     <div class="datetime">{{bug.createdAt | date:'dd-MMM-yyyy'}}</div>
-                    <span>{{bug.isClosed}}</span>
+                  
                 </li>
                
             </ol>
@@ -38,7 +38,11 @@ import { Bug } from './models/Bug';
     `
 })
 export class BugTrackerComponent{
-    bugs : Array<Bug> = [];
+    bugs : Array<Bug> = [
+        {name : 'User actions not recognized', isClosed : false, createdAt : new Date()},
+        {name : 'Zero balance displayed', isClosed : true, createdAt : new Date()},
+        {name : 'Server communication failure', isClosed : false, createdAt : new Date()},
+    ];
 
     onAddNewClick(bugname : string){
         let newBug : Bug = {
@@ -46,11 +50,16 @@ export class BugTrackerComponent{
             isClosed : false,
             createdAt : new Date()
         };
-        this.bugs.push(newBug);
+        this.bugs = this.bugs.concat([newBug]);
     }
 
     onBugClick(bug : Bug){
-        bug.isClosed = !bug.isClosed;
+        this.bugs = this.bugs.map(b => {
+            if (b === bug){
+                b.isClosed = !b.isClosed;
+            }
+            return b;
+        });
     }
 
     onRemoveClosedClick(){
@@ -60,6 +69,7 @@ export class BugTrackerComponent{
     }
 
     getClosedCount(){
+       
         let result = 0;
         for(var i=0; i < this.bugs.length; i++)
             if (this.bugs[i].isClosed)
