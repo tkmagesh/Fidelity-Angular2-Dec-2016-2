@@ -1,0 +1,36 @@
+ <section class="content">
+        <section class="stats">
+            <span class="closed">{{ bugs | closedCount }}</span>
+            <span> / </span>
+            <span>{{bugs.length}}</span>
+        </section>
+        <section class="sort">
+            <label for="">Order By :</label>
+            <select [(ngModel)]="bugSort">
+                <option value="id" selected>Id</option>
+                <option value="name">Name</option>
+                <option value="isClosed">Status</option>
+                <option value="createdAt">Created At</option>
+            </select>
+            <label for="">Descending :</label>
+            <input type="checkbox" [(ngModel)]="bugSortDescending">
+        </section>
+        <section class="edit">
+            <label for="">Bug :</label>
+            <input type="text" #txtBugName>
+            <input type="button" value="Add New" (click)="onAddNewClick(txtBugName.value)">
+        </section>
+        <section class="list">
+            <ol>
+                <li *ngFor="let bug of bugs | sort:bugSort:bugSortDescending">
+                    <span class="bugname" (click)="onBugClick(bug)" [ngClass]="{closed : bug.isClosed, className : expr}">
+                        {{bug.name | trimText:40}}
+                    </span>
+                    <div class="datetime">{{bug.createdAt | date:'dd-MMM-yyyy'}}</div>
+                  
+                </li>
+               
+            </ol>
+            <input type="button" value="Remove Completed" (click)="onRemoveClosedClick()">
+        </section>
+    </section>

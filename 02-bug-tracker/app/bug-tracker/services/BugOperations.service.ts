@@ -3,9 +3,12 @@ import { Bug } from '../models/Bug';
 
 @Injectable()
 export class BugOperations{
-    createNew (bugname : string) : Bug{
+   
+
+    createNew (id : number, bugname : string) : Bug{
         return {
-             name : bugname,
+            id : id,
+            name : bugname,
             isClosed : false,
             createdAt : new Date()
         };
@@ -13,6 +16,7 @@ export class BugOperations{
 
     toggle ( bug : Bug ) : Bug{
         return {
+            id   : bug.id,
             name : bug.name,
             isClosed : !bug.isClosed,
             createdAt : bug.createdAt
