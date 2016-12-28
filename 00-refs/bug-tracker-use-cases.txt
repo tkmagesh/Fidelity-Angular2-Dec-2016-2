@@ -1,0 +1,13 @@
+Use Cases
+=========
+1. Add a bug
+2. List the bugs
+3. Toggle the 'closed' status of a bug
+4. Remove closed bugs
+5. Display statistics
+6. Improvise bug Display
+7. Sort the bugs
+8. Persist the bugs in the local storage
+9. Display 'createdAt'
+10. Persist the bugs in the server
+11. Make the bugs accessible through unique urls
