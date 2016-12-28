@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Bug } from './models/Bug';
+import { BugOperations } from './services/BugOperations.service';
 
 @Component({
     selector : 'bug-tracker',
     template : `
     <section class="content">
         <section class="stats">
-            <span class="closed">{{getClosedCount()}}</span>
+            <span class="closed">{{ bugs | closedCount }}</span>
             <span> / </span>
             <span>{{bugs.length}}</span>
         </section>
@@ -38,42 +39,28 @@ import { Bug } from './models/Bug';
     `
 })
 export class BugTrackerComponent{
+    
     bugs : Array<Bug> = [
         {name : 'User actions not recognized', isClosed : false, createdAt : new Date()},
         {name : 'Zero balance displayed', isClosed : true, createdAt : new Date()},
         {name : 'Server communication failure', isClosed : false, createdAt : new Date()},
     ];
 
+    constructor(private _bugOperations : BugOperations){
+
+    }
     onAddNewClick(bugname : string){
-        let newBug : Bug = {
-            name : bugname,
-            isClosed : false,
-            createdAt : new Date()
-        };
+        let newBug = this._bugOperations.createNew(bugname);
         this.bugs = this.bugs.concat([newBug]);
     }
 
     onBugClick(bug : Bug){
-        this.bugs = this.bugs.map(b => {
-            if (b === bug){
-                b.isClosed = !b.isClosed;
-            }
-            return b;
-        });
+        this.bugs = this.bugs.map(b => b === bug ? this._bugOperations.toggle(b) : b);
     }
 
     onRemoveClosedClick(){
-        for(let i = this.bugs.length-1; i >=0; i--)
-            if (this.bugs[i].isClosed)
-                this.bugs.splice(i, 1);
+        this.bugs = this.bugs.filter(b => !b.isClosed);
     }
 
-    getClosedCount(){
-       
-        let result = 0;
-        for(var i=0; i < this.bugs.length; i++)
-            if (this.bugs[i].isClosed)
-                ++result;
-        return result;
-    }
+   
 }
