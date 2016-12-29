@@ -1,9 +1,5 @@
  <section class="content">
-        <section class="stats">
-            <span class="closed">{{ bugs | closedCount }}</span>
-            <span> / </span>
-            <span>{{bugs.length}}</span>
-        </section>
+       <bug-stats [data]="bugs"></bug-stats>
         <section class="sort">
             <label for="">Order By :</label>
             <select [(ngModel)]="bugSort">
@@ -15,14 +11,11 @@
             <label for="">Descending :</label>
             <input type="checkbox" [(ngModel)]="bugSortDescending">
         </section>
-        <section class="edit">
-            <label for="">Bug :</label>
-            <input type="text" #txtBugName>
-            <input type="button" value="Add New" (click)="onAddNewClick(txtBugName.value)">
-        </section>
+        <bug-edit (onNewBug)="onNewBugAddEvent($event)"></bug-edit>
         <section class="list">
             <ol>
-                <li *ngFor="let bug of bugs | sort:bugSort:bugSortDescending">
+                
+                 <li *ngFor="let bug of bugs | sort:bugSort:bugSortDescending ">
                     <span class="bugname" (click)="onBugClick(bug)" [ngClass]="{closed : bug.isClosed, className : expr}">
                         {{bug.name | trimText:40}}
                     </span>

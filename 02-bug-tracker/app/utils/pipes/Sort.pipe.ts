@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SortPipe implements PipeTransform{
     transform(data : Array<any>, sortBy : string, descending : boolean = false)  : Array<any>{
         if (!sortBy) return data; 
-        var comparer = getComparer(sortBy);
+        let comparer : IComparer = getComparer(sortBy);
         if (descending){
             comparer = getDescending(comparer);
         }
@@ -18,12 +18,14 @@ export class SortPipe implements PipeTransform{
 interface IComparer{
     (item1 : any, item2: any) : number
 }
+
 function getDescending(comparer : IComparer) : IComparer{
     return function(item1:any, item2:any) : number{
         var result = comparer(item1, item2);
         return result * -1;
     }
 }
+
 function getComparer(attrName : string): IComparer {
     if (!attrName) return () => 0;
     return function(item1 : any, item2 : any) : number {

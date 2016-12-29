@@ -9,7 +9,7 @@ export class BugStorage{
 
     }
     getAll() : Array<Bug>{
-        var result = [];
+        var result = new Array<Bug>();
         for(var i=0; i < window.localStorage.length; i++){
             var key = window.localStorage.key(i);
             var value = window.localStorage.getItem(key);
