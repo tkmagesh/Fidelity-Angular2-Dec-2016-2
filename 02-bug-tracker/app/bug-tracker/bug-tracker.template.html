@@ -12,5 +12,5 @@
             <input type="checkbox" [(ngModel)]="bugSortDescending">
         </section>
         <bug-edit (onNewBug)="onNewBugAddEvent($event)"></bug-edit>
-        <bug-list></bug-list>
+        <bug-list [sortBy]="bugSort" [sortOrder]="bugSortDescending" ></bug-list>
     </section>

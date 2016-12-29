@@ -6,7 +6,7 @@ import { Bug } from '../models/Bug';
     template : `
      <section class="list">
             <ol>
-                <bug-item *ngFor="let bug of _bugsCollection.list | sort:bugSort:bugSortDescending " [data]="bug" (onToggle)="onBugToggle($event)">
+                <bug-item *ngFor="let bug of _bugsCollection.list | sort:sortBy:sortOrder " [data]="bug" (onToggle)="onBugToggle($event)">
 
                 </bug-item>
                 
@@ -18,6 +18,12 @@ import { Bug } from '../models/Bug';
     selector : 'bug-list'
 })
 export class BugListComponent {
+    @Input()
+    sortBy : string = '';
+
+    @Input()
+    sortOrder : boolean = false;
+    
     constructor(private _bugsCollection : BugsCollection){
         
     }

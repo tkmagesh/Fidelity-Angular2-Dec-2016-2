@@ -23,6 +23,15 @@
       "name": "This is a new bug in another controller",
       "isClosed": false,
       "createdAt": "2016-12-23T09:49:44.142Z"
+    },
+    {
+      "id": 10
+    },
+    {
+      "id": 11,
+      "name": "This is a new bug",
+      "isClosed": false,
+      "createdAt": "2016-09-09T06:38:33.530Z"
     }
   ],
   "employees": [
