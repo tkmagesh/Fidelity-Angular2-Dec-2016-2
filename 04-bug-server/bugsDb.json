@@ -1,0 +1,38 @@
+{
+  "bugs": [
+    {
+      "id": 3,
+      "name": "Server communication failure",
+      "isClosed": false,
+      "createdAt": "2016-09-09T06:38:33.530Z"
+    },
+    {
+      "id": 7,
+      "name": "Application not responding to user actions",
+      "isClosed": false,
+      "createdAt": "2016-12-23T09:35:03.401Z"
+    },
+    {
+      "id": 8,
+      "name": "[Default Bug]",
+      "isClosed": false,
+      "createdAt": "2016-12-23T09:49:35.721Z"
+    },
+    {
+      "id": 9,
+      "name": "This is a new bug in another controller",
+      "isClosed": false,
+      "createdAt": "2016-12-23T09:49:44.142Z"
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "name": "Magesh"
+    },
+    {
+      "id": 2,
+      "name": "Suresh"
+    }
+  ]
+}
