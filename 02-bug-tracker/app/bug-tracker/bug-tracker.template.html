@@ -1,5 +1,5 @@
  <section class="content">
-       <bug-stats [data]="bugs"></bug-stats>
+       <bug-stats [data]="_bugsCollection.list"></bug-stats>
         <section class="sort">
             <label for="">Order By :</label>
             <select [(ngModel)]="bugSort">
@@ -12,18 +12,5 @@
             <input type="checkbox" [(ngModel)]="bugSortDescending">
         </section>
         <bug-edit (onNewBug)="onNewBugAddEvent($event)"></bug-edit>
-        <section class="list">
-            <ol>
-                
-                 <li *ngFor="let bug of bugs | sort:bugSort:bugSortDescending ">
-                    <span class="bugname" (click)="onBugClick(bug)" [ngClass]="{closed : bug.isClosed, className : expr}">
-                        {{bug.name | trimText:40}}
-                    </span>
-                    <div class="datetime">{{bug.createdAt | date:'dd-MMM-yyyy'}}</div>
-                  
-                </li>
-               
-            </ol>
-            <input type="button" value="Remove Completed" (click)="onRemoveClosedClick()">
-        </section>
+        <bug-list></bug-list>
     </section>
