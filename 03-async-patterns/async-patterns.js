@@ -11,22 +11,45 @@ var pgm = (function(){
         console.log(`[Consumer] result = ${result}`);
     }
 
-    function addAsync(x,y){
+    function addAsyncCallback(x,y, onResult){
         console.log(`   [Service] processing ${x} and ${y}`)
         setTimeout(function(){
             var result = x + y;
             console.log(`   [Service] returning result`);
-            return result;
+            if (typeof onResult === 'function')
+                onResult(result);
         },5000);
     }
-    function addAsyncClient(x,y){
-        console.log(`[Consumer] triggering addAsync`);
-        var result = addAsync(x,y);
-        console.log(`[Consumer] result = ${result}`);
+    function addAsyncCallbackClient(x,y){
+        console.log(`[Consumer] triggering addAsyncCallback`);
+        addAsyncCallback(x,y, function(result){
+            console.log(`[Consumer] result = ${result}`);
+        });
+        
     }
+
+    var addAsyncEvent = (function(){
+        var _subscribers = [];
+        function subscribe(subscriptionFn){
+            _subscribers.push(subscriptionFn);
+        }
+        function add(x,y, onResult){
+            console.log(`   [Service] processing ${x} and ${y}`)
+            setTimeout(function(){
+                var result = x + y;
+                console.log(`   [Service] returning result`);
+                _subscribers.forEach(subscriber => subscriber(result));
+            },5000);
+        }
+        return {
+            subscribe : subscribe,
+            add : add
+        }
+    })();
 
     return {
         addSyncClient : addSyncClient,
-        addAsyncClient : addAsyncClient
+        addAsyncCallbackClient : addAsyncCallbackClient,
+        addAsyncEvent : addAsyncEvent
     }
 })();
