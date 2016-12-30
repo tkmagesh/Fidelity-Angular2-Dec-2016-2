@@ -1,0 +1,16 @@
+ <section class="content">
+       <bug-stats [data]="_bugsCollection.list"></bug-stats>
+        <section class="sort">
+            <label for="">Order By :</label>
+            <select [(ngModel)]="bugSort">
+                <option value="id" selected>Id</option>
+                <option value="name">Name</option>
+                <option value="isClosed">Status</option>
+                <option value="createdAt">Created At</option>
+            </select>
+            <label for="">Descending :</label>
+            <input type="checkbox" [(ngModel)]="bugSortDescending">
+        </section>
+        <bug-edit (onNewBug)="onNewBugAddEvent($event)"></bug-edit>
+        <bug-list [sortBy]="bugSort" [sortOrder]="bugSortDescending" ></bug-list>
+    </section>

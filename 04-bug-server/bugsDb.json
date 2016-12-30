@@ -7,31 +7,34 @@
       "createdAt": "2016-09-09T06:38:33.530Z"
     },
     {
-      "id": 7,
+      "id": 4,
       "name": "Application not responding to user actions",
       "isClosed": false,
       "createdAt": "2016-12-23T09:35:03.401Z"
     },
     {
-      "id": 8,
+      "id": 5,
       "name": "[Default Bug]",
-      "isClosed": false,
+      "isClosed": true,
       "createdAt": "2016-12-23T09:49:35.721Z"
     },
     {
-      "id": 9,
+      "id": 6,
       "name": "This is a new bug in another controller",
       "isClosed": false,
       "createdAt": "2016-12-23T09:49:44.142Z"
     },
     {
-      "id": 10
-    },
-    {
-      "id": 11,
+      "id": 7,
       "name": "This is a new bug",
       "isClosed": false,
       "createdAt": "2016-09-09T06:38:33.530Z"
+    },
+    {
+      "id": 8,
+      "name": "fetch calls not working",
+      "isClosed": false,
+      "createdAt": "2016-12-30T05:27:09.504Z"
     }
   ],
   "employees": [
